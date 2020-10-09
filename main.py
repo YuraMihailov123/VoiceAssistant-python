@@ -1,5 +1,6 @@
 import speech_recognition as sr
 import os
+from googlesearch import search
 import pyaudio
 import sys
 import webbrowser
@@ -26,7 +27,18 @@ def listen_from_user():
 
      return task
 
+def do_actions(action):
+    if 'найди' in action:
+        query = action.split(" ",1)[1].strip()
+        search_google_possible_links(query)
+
+
+
+def search_google_possible_links(query):
+
+    for j in search(query, tld="com", lang="ru", num=10, stop=10, pause=2):
+        print(j)
 
 talk_to_user("Привет")
 while True:
-    listen_from_user()
+    do_actions(listen_from_user())
